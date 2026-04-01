@@ -2,9 +2,9 @@ import java.util.*;
 
 /**
  * MAIN CLASS- TrainConsistManagementApp
- * UC9: Group Bogies by Type (Collectors.groupingBy)
+ * UC10: Count Total Seats in Train (reduce)
  * @author Nikhil
- * @version 9.0
+ * @version 10.0
  */
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,30 +35,26 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
         List<Bogie> bogies = new ArrayList<>();
         System.out.println("======================");
-        System.out.println("UC9: Group Bogies by Type (Collectors.groupingBy)");
+        System.out.println("UC10: Count Total Seats in Train (reduce)");
         System.out.println("======================\n");
+
+
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("Sleeper", 70));
-        bogies.add(new Bogie("AC Chair", 50));
+        bogies.add(new Bogie("General", 90));
 
-        System.out.println("All Bogies:");
+        System.out.println("Bogies in Train:");
         for (Bogie b : bogies) {
             System.out.println(b);
         }
 
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getName));
+        int totalSeats = bogies.stream()
+                .map(b -> b.getCapacity())
+                .reduce(0, Integer::sum);
 
-        System.out.println("\nGrouped Bogies:\n");
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println("Bogie Type: "+entry.getKey());
-            for (Bogie b : entry.getValue()) {
-                System.out.println("  " + b);
-            }
-        }
+        System.out.println("\nTotal Seating Capacity: " + totalSeats);
 
-        System.out.println("\nUC9 grouping completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
