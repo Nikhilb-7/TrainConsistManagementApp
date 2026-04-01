@@ -2,11 +2,12 @@ import java.util.*;
 
 /**
  * MAIN CLASS- TrainConsistManagementApp
- * UC7: Sort Bogies by Capacity (Comparator)
+ * UC8: Filter Passenger Bogies Using Streams
  * @author Nikhil
- * @version 7.0
+ * @version 8.0
  */
 import java.util.*;
+import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
@@ -33,26 +34,26 @@ class Bogie {
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         List<Bogie> bogies = new ArrayList<>();
-        System.out.println("======================");
-        System.out.println("UC7: Sort Bogies by Capacity (Comparator)");
-        System.out.println("======================\n");
+
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
         bogies.add(new Bogie("General", 90));
 
-        System.out.println("Before Sorting:");
+        System.out.println("All Bogies:");
         for (Bogie b : bogies) {
             System.out.println(b);
         }
 
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        List<Bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        System.out.println("\nAfter Sorting by Capacity:");
-        for (Bogie b : bogies) {
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
             System.out.println(b);
         }
 
-        System.out.println("\nUC7 sorting completed...");
+        System.out.println("\nUC8 filtering completed...");
     }
 }
