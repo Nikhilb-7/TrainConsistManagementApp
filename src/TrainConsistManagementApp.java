@@ -1,65 +1,46 @@
 /**
  * MAIN CLASS - TrainConsistManagementApp
- * UC15: Safe Cargo Assignment Using try-catch-finally
+ * UC16: Sort Passenger Bogies by Capacity (Bubble Sort)
  * @author Nikhil
- * @version 15.0
+ * @version 16.0
  */
-
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
-
-class GoodsBogie {
-    private String shape;
-    private String cargo;
-
-    public GoodsBogie(String shape) {
-        this.shape = shape;
-    }
-
-    public void assignCargo(String cargoType) {
-
-        try {
-
-            if(shape.equalsIgnoreCase("Rectangular") &&
-                    cargoType.equalsIgnoreCase("Petroleum")) {
-
-                throw new CargoSafetyException(
-                        "Unsafe cargo assignment!"
-                );
-            }
-
-            cargo = cargoType;
-            System.out.println("Cargo assigned successfully ->");
-            System.out.println(cargo);
-
-        }
-
-        catch(CargoSafetyException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-        finally {
-            System.out.println("Cargo validation completed for "
-                    + shape + " bogie\n");
-        }
-    }
-}
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("UC15 Safe Cargo Assignment\n");
+        int capacities[] = {72, 56, 24, 70, 60};
+        System.out.println("=======================================");
+        System.out.println("UC16 Manual Sorting using Bubble Sort\n");
+        System.out.println("=======================================");
 
-        GoodsBogie g1 = new GoodsBogie("Cylindrical");
-        g1.assignCargo("Petroleum");
+        System.out.println("Original Capacities:\n");
 
-        GoodsBogie g2 = new GoodsBogie("Rectangular");
-        g2.assignCargo("Petroleum");
+        for(int i=0; i<capacities.length; i++) {
+            System.out.print(capacities[i] + " ");
+        }
 
-        System.out.println("UC15 runtime handling completed.");
+        // Bubble Sort Logic
+        for(int i=0; i<capacities.length-1; i++) {
+            for(int j=0; j<capacities.length-1-i; j++) {
+
+                if(capacities[j] > capacities[j+1]) {
+
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j+1];
+                    capacities[j+1] = temp;
+                }
+            }
+        }
+
+        System.out.println("\n");
+        System.out.print("Sorted Capacities (Ascending): ");
+
+        for(int i=0; i<capacities.length; i++) {
+            System.out.print(capacities[i] + " ");
+        }
+
+        System.out.println("\n");
+        System.out.println("UC16 sorting completed.");
     }
 }
