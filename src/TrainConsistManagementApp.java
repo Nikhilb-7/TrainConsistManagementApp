@@ -5,7 +5,7 @@
  * @version 20.0
  */
 
-public class UseCase20TrainConsistMgmt {
+public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
